@@ -221,7 +221,7 @@ body {
   transform: translateX(-50%);
   background-color: white;
   left: 50%;
-  bottom: 0;
+  bottom: -1px;
 }
 .nav-button:hover::after {
   width: 100px;
@@ -310,6 +310,12 @@ body {
     text-align: center;
     margin-bottom: 0.5rem;
     width: 100%;
+    background-color: #23b923;
+    padding: 0.5rem 0;
+    border-radius: clamp(0.6rem, 3vw, 3rem);
+  }
+  .nav-button::after {
+    bottom: -5px;
   }
   .check:checked ~ .nav-button::after {
     width: 100%;
