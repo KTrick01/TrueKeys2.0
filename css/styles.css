@@ -126,7 +126,7 @@ body {
   border-left: 0px solid white;
   border-bottom: 2px solid white;
   border-radius: clamp(0.6rem, 3vw, 3rem);
-  padding: 1rem 0;
+  padding: 1rem;
   margin-top: clamp(1rem, 4vw, 3rem);
   width: 100%;
   display: grid;
@@ -148,24 +148,8 @@ body {
   gap: 1rem;
   overflow: hidden;
 }
-.page__grid-game:hover {
-  border-radius: 1rem;
+.page__grid-game:focus {
   background-color: #23b923;
-  padding: 1.5rem;
-  transform: scale(1.1);
-  z-index: 999;
-}
-.page__grid-game:hover .page__grid-game-img-container {
-  border-radius: 1rem;
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.507);
-}
-.page__grid-game:hover::after {
-  left: 50%;
-  top: 0;
-  max-width: 900px;
-  width: 100%;
-  transform: translateX(-50%);
-  background-color: rgba(35, 185, 35, 0.6980392157);
 }
 .page__grid-game-img {
   height: 100%;
@@ -189,7 +173,7 @@ body {
   transition: 0.3s;
   text-align: center;
   content: "$ 10.99";
-  background-color: #0a8d0a;
+  background-color: #23b923;
   color: white;
   position: absolute;
   left: 7%;
@@ -208,7 +192,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  z-index: 999;
+  z-index: 9999;
   position: fixed;
   bottom: 1rem;
   right: 1rem;
@@ -251,6 +235,27 @@ body {
   clip-path: inset(0 0 0 0);
 }
 
+@media (hover: hover) {
+  .page__grid-game:hover {
+    border-radius: 1rem;
+    background-color: #23b923;
+    padding: 1.5rem;
+    transform: scale(1.1);
+    z-index: 999;
+  }
+  .page__grid-game:hover .page__grid-game-img-container {
+    border-radius: 1rem;
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.507);
+  }
+  .page__grid-game:hover::after {
+    left: 50%;
+    top: 0;
+    max-width: 900px;
+    width: 100%;
+    transform: translateX(-50%);
+    background-color: rgba(35, 185, 35, 0.6980392157);
+  }
+}
 @media (max-width: 930px) {
   .page__nav-buttons {
     display: none;
