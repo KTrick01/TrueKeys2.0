@@ -305,8 +305,14 @@ body {
   .page__header {
     justify-content: space-between;
   }
-  .nav-button::after {
-    content: unset;
+  .nav-button {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  .check:checked ~ .nav-button::after {
+    width: 100%;
   }
   .check:checked ~ .page__nav-buttons {
     opacity: 1;
