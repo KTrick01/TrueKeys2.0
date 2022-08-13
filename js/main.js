@@ -1,10 +1,11 @@
-const drop = document.querySelectorAll(".check");
+const closeDrop = document.querySelector("#null");
 
-for (let i = 0; i < drop.length; i++) {
-    drop[i].onclick = function (e) {
-        e.checked=false
-        
-    }
-    
-}
+document.addEventListener('click', function (e){
+    if (e.target.closest(".containers")) return
+    closeDrop.checked = true;
+ 
+})
+
+
+
 

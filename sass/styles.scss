@@ -19,6 +19,7 @@ body {
     color: white;
     background-color: #100125;
     background-image: $Background;
+    background-attachment: fixed;
 }
 
 .check {
@@ -30,20 +31,23 @@ body {
     border-radius: 1rem;
     height: max-content;
     max-height: 0;
-    opacity: 0;
+    width: 150px;
     visibility: hidden;
     overflow: hidden;
-    transition: all .2s;
+    transition: all .3s;
     position: absolute;
     inset: 0;
     top: 30px;
-    left: -45px;
+    left: 50%;
+    transform: translateX(-50%);
     @include flex(space-between, center);
     flex-direction: column;
     gap: 1rem;
     max-width: max-content;
     padding: 1rem;
-    background-color: #333333;
+    background-color: #20024b;
+    border: 2px solid white;
+    clip-path: inset(0 0 100% 0);
     text-align: center;
 }
 
@@ -52,6 +56,10 @@ body {
 }
 
 .page {
+    &__logo {
+        max-width: 150px
+    }
+
     &__main {
         @include flex(center, center);
         flex-direction: column;
@@ -63,7 +71,8 @@ body {
         padding: 0rem 1rem;
         @include flex(unset, center);
         gap: 1rem;
-        background-color: #5c4ba8;
+        background-color: #20024b;
+        border-bottom: 1px solid white;
     }
 
     &__nav-buttons {
@@ -128,24 +137,24 @@ body {
             position: relative;
             border-radius: $Radius;
             padding: 1rem;
-            background-color: #191970;
+            border: 1px solid rgba(255, 255, 255, 0.548);
+            background-color: #30036e;
             @include flex(space-between, center);
             flex-direction: column;
             gap: 1rem;
             overflow: hidden;
-            
 
             &:hover {
                 border-radius: 1rem;
                 background-color: #23b923;
                 padding: 1.5rem;
                 transform: scale(1.1);
+                z-index: 999;
             }
 
             &:hover .page__grid-game-img-container {
                 border-radius: 1rem;
                 box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.507);
-                
             }
 
             &:hover::after {
@@ -153,21 +162,16 @@ body {
                 top: 0;
                 max-width: 900px;
                 width: 100%;
-
                 transform: translateX(-50%);
                 background-color: #23b923b2;
-                
-                
             }
 
             &-img {
-                
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
 
                 &-container {
-                    
                     transition: .3s;
                     overflow: hidden;
                     border-radius: $Radius;
@@ -175,32 +179,34 @@ body {
             }
 
             &-title {
-
                 font-size: clamp(1rem, 3vw, 1.5rem);
                 max-width: max-content;
                 text-align: center;
             }
+
+            &::after {
+                @include flex(center, center);
+                transition: .3s;
+                text-align: center;
+                content: "$ 10.99";
+                background-color: #0a8d0a;
+                color: white;
+                position: absolute;
+                left: 7%;
+                top: 7%;
+                max-width: 100px;
+                transform: translate(-7%, -7%);
+                padding: .5rem 1rem;
+                border-radius: $Radius;
+                font-size: clamp(.8rem, 2vw, 1.5rem);
+                font-weight: bold;
+            }
         }
 
-        &-game::after {
-            @include flex(center, center);
-            transition: .3s;
-            text-align: center;
-            content: "$ 10.99";
-            background-color: #0a8d0a;
-            color: white;
-            position: absolute;
-            left: 7%;
-            top: 7%;
-            max-width: 100px;
-            transform: translate(-7%, -7%);
-            padding: .5rem 1rem;
-            border-radius: $Radius;
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            font-weight: bold;
-        }
+        
     }
 }
+
 .up {
     transition: .3s;
     @include flex(center, center);
@@ -212,6 +218,7 @@ body {
     width: clamp(1rem, 4vw, 3rem);
     aspect-ratio: 1;
     background-color: #100125;
+
     &:hover {
         background-color: #5c4ba8;
         transform: scale(1.2);
@@ -232,41 +239,22 @@ body {
         background-color: white;
         left: 50%;
         bottom: 0;
-        
     }
+
     &:hover::after {
         width: 100px;
     }
 }
 
+.check:checked ~ .nav-button::after {
+    width: 120px;
+}
 
-
-#steam:checked ~ .dropdown-steam {
+.check:checked ~ .dropdown {
     max-height: 300px;
     visibility: visible;
-    opacity: 1;
     overflow: visible;
-}
-
-#uplay:checked ~ .dropdown-uplay {
-    max-height: 200px;
-    visibility: visible;
-    opacity: 1;
-    overflow: visible;
-}
-
-#gog:checked ~ .dropdown-gog {
-    max-height: 200px;
-    visibility: visible;
-    opacity: 1;
-    overflow: visible;
-}
-
-#origin:checked ~ .dropdown-origin {
-    max-height: 200px;
-    visibility: visible;
-    opacity: 1;
-    overflow: visible;
+    clip-path: inset(0 0 0 0);
 }
 
 @media (max-width:930px) {
@@ -276,7 +264,18 @@ body {
         }
 
         &__grid {
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+            border-radius: unset;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+            &-game {
+                border-radius: 1rem;
+
+                &-img-container {
+                    border-radius: 1rem;
+                }
+            }
         }
 
         &__title-area {
