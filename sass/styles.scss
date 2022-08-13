@@ -58,7 +58,11 @@ body {
 
 .page {
     &__logo {
-        max-width: 150px
+        width: 100%;
+
+        &-container {
+            max-width: clamp(100px, 10vw, 150px)
+        }
     }
 
     &__main {
@@ -69,9 +73,9 @@ body {
     }
 
     &__header {
-        padding: 0rem 1rem;
+        padding: .5rem 1rem;
         @include flex(unset, center);
-        gap: 1rem;
+        gap: 5rem;
         background-color: #20024b;
         border-bottom: 1px solid white;
     }
@@ -144,9 +148,11 @@ body {
             flex-direction: column;
             gap: 1rem;
             overflow: hidden;
+
             &:focus {
                 background-color: $Green;
             }
+
             &-img {
                 height: 100%;
                 width: 100%;
@@ -236,6 +242,18 @@ body {
     clip-path: inset(0 0 0 0);
 }
 
+.menu {
+    display: none;
+    background-image: url("../images/bars-solid.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: invert(1);
+    width: 40px;
+    aspect-ratio: 1;
+    z-index: 99999;
+}
+
 @media (hover:hover) {
     .page__grid-game:hover {
         border-radius: 1rem;
@@ -261,9 +279,32 @@ body {
 }
 
 @media (max-width:930px) {
+    .menu {
+        transition: .3s;
+        display: block;
+        position: absolute;
+        top: .5rem;
+        right: 1rem;
+    }
+
     .page {
         &__nav-buttons {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            border-left: 1px solid white;
+            transition: .3s;
+            transform: translateX(100%);
+            align-items: unset;
+            padding: 1rem;
+            position: fixed;
+            z-index: 10000;
+            padding-top: 5rem;
+            flex-direction: column;
+            justify-content: start;
+            inset: 0;
+            background-color: #20024b;
+            left: 40%;
+            gap: 2rem;
         }
 
         &__grid {
@@ -271,5 +312,36 @@ body {
             border-bottom-width: 1px;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         }
+
+        &__header {
+            justify-content: space-between;
+        }
+    }
+
+    .nav-button::after {
+        content: unset;
+    }
+
+    .check:checked ~ .page__nav-buttons {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0);
+    }
+    .check:checked ~ .menu {
+        position: fixed;
+        background-image: url("../images/xmark-solid.svg");
+    }
+
+    .dropdown {
+        position: relative;
+        border: 0;
+        top: 0;
+        padding: 1rem;
+        border-radius: $Radius;
+        background-color: rgba(255, 255, 255, 0.096);
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        transform: unset;
     }
 }
